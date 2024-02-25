@@ -9,6 +9,7 @@ import com.devsuperior.aula.entities.Person;
 import com.devsuperior.aula.repositories.DepartmentRepository;
 import com.devsuperior.aula.repositories.PersonRepository;
 
+import dtos.PersonDTO;
 import dtos.PersonDepartmentDTO;
 
 @Service
@@ -25,6 +26,17 @@ public class PersonService {
 		entity.setDepartment(department);
 		entity = repository.save(entity);
 		return new PersonDepartmentDTO(entity);
+		
+	}
+	
+	@Transactional
+	public PersonDTO insert(PersonDTO dto) {
+		Person entity = new Person(dto);
+		Department department = new Department();
+		department.setId(dto.getDepartmentId());
+		entity.setDepartment(department);
+		entity = repository.save(entity);
+		return new PersonDTO(entity);
 		
 	}
 	

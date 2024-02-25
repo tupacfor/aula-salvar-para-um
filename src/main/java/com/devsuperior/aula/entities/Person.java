@@ -1,5 +1,6 @@
 package com.devsuperior.aula.entities;
 
+import dtos.PersonDTO;
 import dtos.PersonDepartmentDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +35,12 @@ public class Person {
     }
     
     public Person(PersonDepartmentDTO dto) {
+        id = dto.getId();
+        name = dto.getName();
+        salary = dto.getSalary();
+    }
+    
+    public Person(PersonDTO dto) {
         id = dto.getId();
         name = dto.getName();
         salary = dto.getSalary();

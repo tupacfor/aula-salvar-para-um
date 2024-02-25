@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.devsuperior.aula.services.PersonService;
 
+import dtos.PersonDTO;
 import dtos.PersonDepartmentDTO;
 @RestController
 @RequestMapping(value = "/people")
@@ -20,8 +21,16 @@ public class PersonDepartmentController {
 	@Autowired
 	PersonService service;
 	
-	@PostMapping
+	//@PostMapping
 	public ResponseEntity<PersonDepartmentDTO> insert(@RequestBody PersonDepartmentDTO dto) {
+		dto = service.insert(dto);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(dto.getId()).toUri();
+		return ResponseEntity.created(uri).body(dto);
+	}
+	
+	@PostMapping
+	public ResponseEntity<PersonDTO> insert(@RequestBody PersonDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(dto.getId()).toUri();

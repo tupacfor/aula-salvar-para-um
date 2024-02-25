@@ -1,6 +1,13 @@
 package com.devsuperior.aula.entities;
 
-import jakarta.persistence.*;
+import dtos.PersonDepartmentDTO;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "tb_person")
@@ -24,6 +31,12 @@ public class Person {
         this.name = name;
         this.salary = salary;
         this.department = department;
+    }
+    
+    public Person(PersonDepartmentDTO dto) {
+        id = dto.getId();
+        name = dto.getName();
+        salary = dto.getSalary();
     }
 
     public Long getId() {
